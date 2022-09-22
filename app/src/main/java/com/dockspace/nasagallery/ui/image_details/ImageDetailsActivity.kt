@@ -24,16 +24,18 @@ class ImageDetailsActivity : AppCompatActivity(), ViewPager.OnPageChangeListener
         super.onCreate(savedInstanceState)
         binding = ActivityImageDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUpUI()
+    }
 
+    private fun setUpUI(){
         setSupportActionBar(binding.toolbar)
         binding.toolbar.title = getString(R.string.app_name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        //supportActionBar?.setDisplayShowHomeEnabled(true)
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
 
         dataModel = Gson().fromJson(intent.getStringExtra(EXTRA_ALBUM), DataModel::class.java)
         dataModelItem = intent.getParcelableExtra(EXTRA_ITEM)!!
-       // Log.d(TAG, "onCreate: ${dataModel.size}")
+        // Log.d(TAG, "onCreate: ${dataModel.size}")
 
         imageViewPagerAdapter = ImageViewPagerAdapter(supportFragmentManager)
         imageViewPagerAdapter.addAll(dataModel)
@@ -43,7 +45,6 @@ class ImageDetailsActivity : AppCompatActivity(), ViewPager.OnPageChangeListener
         val selectedIndex: Int = dataModel.indexOf(dataModelItem)
         binding.vpImages.setCurrentItem(selectedIndex, false)
         mPreviousPos = selectedIndex
-
     }
 
     companion object {

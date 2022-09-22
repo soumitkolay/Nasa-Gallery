@@ -27,8 +27,11 @@ class ImageViewFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val item = requireArguments().getParcelable<DataModelItem>(ARGS_ITEM) ?: return
+        setUpUI()
+    }
 
+    private fun setUpUI(){
+        val item = requireArguments().getParcelable<DataModelItem>(ARGS_ITEM) ?: return
         binding.txtTitle.text = item.title
         binding.txtDesc.text = item.explanation
         if (item.copyright != null) {
