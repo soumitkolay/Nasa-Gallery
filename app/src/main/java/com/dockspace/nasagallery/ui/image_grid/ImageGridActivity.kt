@@ -12,6 +12,7 @@ import com.dockspace.nasagallery.databinding.ActivityImageGridBinding
 import com.dockspace.nasagallery.helper.GridSpacingItemDecoration
 import com.dockspace.nasagallery.model.DataModel
 import com.dockspace.nasagallery.model.DataModelItem
+import com.dockspace.nasagallery.ui.image_details.ImageDetailsActivity
 import com.dockspace.nasagallery.ui.image_grid.viewmodel.MainViewModel
 import com.google.gson.Gson
 
@@ -54,7 +55,10 @@ class ImageGridActivity : AppCompatActivity(), GridViewListAdapter.ImageClickInt
     }
 
     override fun onImageClicked(dataModelItem: DataModelItem, position: Int) {
-
+        val intent = Intent(this, ImageDetailsActivity::class.java)
+        intent.putExtra(ImageDetailsActivity.EXTRA_ALBUM, Gson().toJson(dataModel))
+        intent.putExtra(ImageDetailsActivity.EXTRA_ITEM, dataModelItem)
+        startActivity(intent)
     }
 
 }
